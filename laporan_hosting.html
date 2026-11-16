@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan Tugas Project Cyber Security - MachoGym</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --primary: #1e3a8a;
+      --primary-dark: #172554;
+      --primary-light: #3b82f6;
+      --accent: #f97316;
+      --dark: #0f172a;
+      --gray-light: #f8fafc;
+      --gray-border: #e2e8f0;
+      --text: #334155;
+      --text-muted: #64748b;
+      --success: #16a34a;
+      --danger: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background-color: #f1f5f9;
+      line-height: 1.6;
+      font-size: 11pt;
+    }
+
+    .container {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20mm 20mm 25mm 20mm;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    /* Print Controls Bar */
+    .no-print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+
+    .btn-print {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-print:hover {
+      background: #1d4ed8;
+    }
+
+    /* Header & Cover */
+    .header-box {
+      border-bottom: 3px double var(--primary);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .doc-title {
+      font-size: 18pt;
+      font-weight: 800;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+
+    .doc-subtitle {
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .doc-meta {
+      font-size: 10pt;
+      color: var(--text-muted);
+    }
+
+    /* Section Styling */
+    .section {
+      margin-bottom: 24px;
+      page-break-inside: avoid;
+    }
+
+    .section-title {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--primary);
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%);
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .section-content {
+      font-size: 10.5pt;
+      color: var(--text);
+    }
+
+    p {
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-left: 22px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 10pt;
+    }
+
+    th, td {
+      border: 1px solid var(--gray-border);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .table-striped tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Cards / Badges */
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-success { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .badge-info { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
+    .badge-warning { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+
+    .card-url {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 10px 0;
+    }
+
+    .card-url a {
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .code-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 10px 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .diagram-box {
+      background: #f8fafc;
+      border: 1px dashed #94a3b8;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5pt;
+      line-height: 1.5;
+    }
+
+    /* Screenshot Placeholders */
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    .screenshot-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
+      page-break-inside: avoid;
+    }
+
+    .screenshot-card-header {
+      background: #f1f5f9;
+      padding: 6px 10px;
+      font-weight: 600;
+      font-size: 9.5pt;
+      color: var(--dark);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .screenshot-placeholder {
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+      color: #64748b;
+      padding: 15px;
+      text-align: center;
+      font-size: 9pt;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .screenshot-desc {
+      padding: 8px 10px;
+      font-size: 8.5pt;
+      color: #475569;
+      background: #ffffff;
+    }
+
+    /* Print Optimization */
+    @media print {
+      body {
+        background: #ffffff;
+        font-size: 10pt;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .section {
+        page-break-inside: avoid;
+      }
+      a {
+        text-decoration: underline;
+        color: #000;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Print Button (Tidak tercetak) -->
+  <div class="no-print-bar">
+    <div>
+      <strong>📄 Laporan Tugas Project Cyber Security</strong> &mdash; MachoGym
+    </div>
+    <div>
+      <button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan sebagai PDF (A4)</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Header Dokumen -->
+    <div class="header-box">
+      <div class="doc-title">TUGAS PROJECT: PENGEMBANGAN & PENGAMANAN APLIKASI WEB</div>
+      <div class="doc-subtitle">LAPORAN DEPLOYMENT, PENERAPAN KEAMANAN & PENGUJIAN</div>
+      <div class="doc-meta">
+        <strong>Mata Kuliah:</strong> Cyber Security &nbsp;|&nbsp; 
+        <strong>Jenis Tugas:</strong> Individu (Pra UTS) &nbsp;|&nbsp; 
+        <strong>Semester:</strong> Genap 2026/2027
+      </div>
+    </div>
+
+    <!-- 1. IDENTITAS -->
+    <div class="section">
+      <div class="section-title">1. Identitas Mahasiswa</div>
+      <div class="section-content">
+        <table>
+          <tr>
+            <th style="width: 28%;">Nama Lengkap</th>
+            <td><strong>Rafly Irhandy</strong></td>
+          </tr>
+          <tr>
+            <th>NIM</th>
+            <td><strong>[Masukkan NIM Anda Di Sini]</strong></td>
+          </tr>
+          <tr>
+            <th>Kelas / Program Studi</th>
+            <td><strong>Cyber Security / Teknik Informatika</strong></td>
+          </tr>
+          <tr>
+            <th>Judul Aplikasi</th>
+            <td><strong>MachoGym — Web Management & Fitness Membership System</strong></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2. URL APLIKASI AKTIF -->
+    <div class="section">
+      <div class="section-title">2. URL Aplikasi Aktif (Live Deployment)</div>
+      <div class="section-content">
+        <div class="card-url">
+          <p style="margin-bottom: 4px;"><strong>🌐 Alamat URL Publik (FQDN):</strong></p>
+          <p style="font-size: 13pt; margin-bottom: 6px;">
+            <a href="https://machogym.my.id/" target="_blank">https://machogym.my.id/</a>
+            &nbsp;<span class="badge badge-success">✓ HTTPS AKTIF (SSL/TLS VALID)</span>
+          </p>
+          <p style="font-size: 9pt; color: #64748b; margin-bottom: 0;">
+            Aplikasi telah di-hosting dan dapat diakses publik dengan Fully Qualified Domain Name (FQDN) ber-protokol aman HTTPS, tanpa menggunakan localhost atau IP address mentah.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. URL REPOSITORY GIT -->
+    <div class="section">
+      <div class="section-title">3. URL Repository Source Code (Git)</div>
+      <div class="section-content">
+        <div class="card-url">
+          <p style="margin-bottom: 4px;"><strong>📁 Link Repository GitHub:</strong></p>
+          <ul style="margin-bottom: 0;">
+            <li><strong>Frontend / Fullstack Client:</strong> <a href="https://github.com/raflyirhandy/Web-Macho-Gym-React.git" target="_blank">https://github.com/raflyirhandy/Web-Macho-Gym-React.git</a></li>
+            <li><strong>Core Apps / Database Repository:</strong> <a href="https://github.com/raflyirhandy/Gym-Apps.git" target="_blank">https://github.com/raflyirhandy/Gym-Apps.git</a></li>
+          </ul>
+          <p style="font-size: 9pt; color: #64748b; margin-top: 6px; margin-bottom: 0;">
+            * Riwayat commit mencerminkan tahapan pengembangan mandiri, dilengkapi README.md terstruktur dan tanpa kebocoran file kredensial/secret.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. AKUN UJI COBA -->
+    <div class="section">
+      <div class="section-title">4. Akun Uji Coba (Testing Credentials)</div>
+      <div class="section-content">
+        <p>Akun berikut disediakan bagi dosen penguji untuk mengevaluasi fitur otorisasi dan kontrol akses berbasis peran (Role-Based Access Control):</p>
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th>Peran (Role)</th>
+              <th>Email / Username</th>
+              <th>Password</th>
+              <th>Hak Akses & Batasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-info">🛡️ Admin</span></td>
+              <td><code>admin@gym.com</code></td>
+              <td><code>password123</code></td>
+              <td>Akses penuh: Manajemen Member, Trainer, Jadwal Kelas, Verifikasi Pembayaran, Laporan Keuangan/Operasional.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-warning">🏋️ Trainer</span></td>
+              <td><code>trainer1@gym.com</code></td>
+              <td><code>password123</code></td>
+              <td>Akses terbatas: Daftar member bimbingan, pembuatan program latihan workout, chat bimbingan. Tidak dapat membuka menu admin.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">👤 Member</span></td>
+              <td><code>member1@gym.com</code></td>
+              <td><code>password123</code></td>
+              <td>Akses anggota: Booking kelas, tracking progres tubuh/latihan, riwayat pembayaran, konsultasi chat ke trainer.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAGE BREAK UNTUK CETAK RAPI -->
+    <div class="page-break"></div>
+
+    <!-- 5. PENJELASAN APLIKASI -->
+    <div class="section">
+      <div class="section-title">5. Penjelasan Aplikasi</div>
+      <div class="section-content">
+        <p><strong>A. Latar Belakang & Tujuan:</strong><br>
+        Pengelolaan gym konvensional sering mengalami kendala pada pencatatan keanggotaan, pembagian jadwal kelas yang bertabrakan, ketidaktransparanan bukti pembayaran, serta minimnya privasi dan keamanan data anggota. Aplikasi <strong>MachoGym</strong> dibangun untuk memodernisasi tata kelola pusat kebugaran berbasis web yang aman, terintegrasi, dan mudah digunakan dengan pemisahan peran yang tegas (Admin, Trainer, dan Member).</p>
+
+        <p><strong>B. Fitur Utama Aplikasi:</strong></p>
+        <ol>
+          <li><strong>Autentikasi & Otorisasi:</strong> Registrasi mandiri, login multi-role, logout aman, serta proteksi route pada sisi frontend dan middleware backend.</li>
+          <li><strong>Pengelolaan Data (CRUD Berbasis Database):</strong>
+            <ul>
+              <li><em>Admin:</em> Tambah, lihat, ubah status, dan hapus data Member, Trainer, dan Kelas latihan.</li>
+              <li><em>Trainer:</em> Menyusun dan memperbarui program latihan fisik spesifik per member.</li>
+              <li><em>Member:</em> Booking kelas latihan, submit data progres fisik harian, dan upload bukti pembayaran.</li>
+            </ul>
+          </li>
+          <li><strong>Laporan & Monitoring:</strong>
+            <ul>
+              <li>Dashboard ringkasan statistik (total member aktif, trainer, kelas).</li>
+              <li>Tabel rekapitulasi pembayaran dan verifikasi tagihan membership.</li>
+              <li>Visualisasi grafik progres kebugaran member (berat badan, durasi latihan, beban).</li>
+            </ul>
+          </li>
+          <li><strong>Fitur Interaktif:</strong> Konsultasi real-time antara member dan trainer binaannya.</li>
+        </ol>
+
+        <p><strong>C. Arsitektur & Teknologi yang Digunakan:</strong></p>
+        <div class="diagram-box">
+          [ Browser Klien / Mahasiswa & Dosen ]<br>
+          │ (HTTPS / TLS Port 443)<br>
+          ▼<br>
+          <strong>Cloud DNS / Reverse Proxy (machogym.my.id)</strong><br>
+          │<br>
+          ┌───────────────────────┴───────────────────────┐<br>
+          ▼                                               ▼<br>
+          <strong>Frontend Layer (React Vite / SPA)</strong>           <strong>Backend API Layer (Node.js / Express)</strong><br>
+          - Tailwind CSS (Glassmorphism UI)               - Router & Controller<br>
+          - Zustand Store & Protected Routes              - JWT / HttpOnly Cookie & Bcrypt<br>
+          - Axios Client with Interceptors                - Input Sanitizer & Security Headers<br>
+          └───────────────────────┬───────────────────────┘<br>
+                                  │ (ORM / Parameterized Queries)<br>
+                                  ▼<br>
+                      <strong>Database Layer (MySQL 8.0)</strong><br>
+                      - Relational Schema (gym_db)<br>
+                      - Encrypted / Hashed Passwords
+        </div>
+
+        <p><strong>D. Penerapan Aspek Keamanan (Secure Coding):</strong></p>
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Aspek Keamanan</th>
+              <th style="width: 40%;">Implementasi pada MachoGym</th>
+              <th>Tujuan & Alasan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Password Hashing</strong></td>
+              <td>Menggunakan algoritma <code>bcrypt</code> dengan salt rounds standar industri saat registrasi dan validasi login.</td>
+              <td>Mencegah kebocoran kata sandi dalam bentuk plaintext jika database terekspos.</td>
+            </tr>
+            <tr>
+              <td><strong>Pencegahan SQLi</strong></td>
+              <td>Menggunakan Prepared Statements dan Parameterized Queries via Sequelize ORM / PDO.</td>
+              <td>Memisahkan query instruksi SQL dengan data input user, sehingga karakter berbahaya dinetralisir.</td>
+            </tr>
+            <tr>
+              <td><strong>Pencegahan XSS</strong></td>
+              <td>Sanitasi input, encoding karakter HTML pada rendering React (auto-escaped JSX), dan validasi tipe data di backend.</td>
+              <td>Mencegah injeksi skrip JavaScript jahat yang dapat mencuri sesi/token pengguna.</td>
+            </tr>
+            <tr>
+              <td><strong>Manajemen Sesi / JWT</strong></td>
+              <td>Token JWT disimpan dalam cookie bertanda flag <code>HttpOnly</code> dan <code>Secure</code> serta verifikasi signature token.</td>
+              <td>Melindungi token dari pembacaan oleh script via DOM (XSS) dan memastikan enkripsi saat transmisi.</td>
+            </tr>
+            <tr>
+              <td><strong>Kontrol Akses (RBAC)</strong></td>
+              <td>Middleware proteksi peran (Admin, Trainer, Member) di setiap endpoint API dan navigasi frontend.</td>
+              <td>Mencegah kerentanan IDOR dan akses menu sensitif oleh pengguna yang tidak berhak.</td>
+            </tr>
+            <tr>
+              <td><strong>Environment Secrets</strong></td>
+              <td>Kredensial database, JWT Secret, port, dan API key disimpan di <code>.env</code> dan di-exclude dari Git via <code>.gitignore</code>.</td>
+              <td>Mencegah kebocoran rahasia sistem pada public repository GitHub.</td>
+            </tr>
+            <tr>
+              <td><strong>HTTPS & TLS</strong></td>
+              <td>Sertifikat SSL/TLS terpasang valid pada domain <code>machogym.my.id</code> dengan redirect otomatis dari HTTP.</td>
+              <td>Menjamin kerahasiaan transmisi data (anti Man-in-the-Middle / sniffing).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAGE BREAK -->
+    <div class="page-break"></div>
+
+    <!-- 6. POTENSI PENGEMBANGAN KE SKRIPSI -->
+    <div class="section">
+      <div class="section-title">6. Potensi Pengembangan ke Skripsi</div>
+      <div class="section-content">
+        <p><strong>A. Rencana Singkat Topik Skripsi:</strong><br>
+        Topik yang direncanakan berfokus pada <em>"Penerapan Model Zero-Trust Security dan Otomasi Deteksi Anomali Akses pada Sistem Manajemen Fasilitas Kebugaran Terdistribusi Berbasis Web"</em>.</p>
+        <p><strong>B. Rumusan Masalah yang Diangkat:</strong></p>
+        <ul>
+          <li>Bagaimana merancang arsitektur kontrol akses adaptif berbasis otentikasi multi-faktor (MFA) dan token yang tahan terhadap serangan Session Hijacking dan Credential Stuffing?</li>
+          <li>Bagaimana menerapkan algoritma Machine Learning sederhana (misal Isolation Forest) untuk mendeteksi transaksi atau login anomali pada platform kebugaran?</li>
+        </ul>
+        <p><strong>C. Fitur Lanjutan yang Akan Dikembangkan:</strong></p>
+        <ul>
+          <li>Integrasi Payment Gateway resmi (Midtrans/Xendit) dengan verifikasi Webhook terenkripsi HMAC SHA512.</li>
+          <li>Integrasi Multi-Factor Authentication (MFA / TOTP) menggunakan Google Authenticator.</li>
+          <li>Sistem audit trail dan logging terenkripsi untuk compliance GDPR dan PDP (Perlindungan Data Pribadi).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. PENGGUNAAN AI AGENT -->
+    <div class="section">
+      <div class="section-title">7. Penggunaan AI Agent & Asisten AI</div>
+      <div class="section-content">
+        <p>Sesuai dengan ketentuan tugas (Poin 3e), pembuatan aplikasi ini memanfaatkan bantuan AI agent secara etis dan bertanggung jawab:</p>
+        <table>
+          <tr>
+            <th style="width: 25%;">Alat AI yang Digunakan</th>
+            <td>Antigravity (Google DeepMind) & Gemini 3.8 / Cursor Agent</td>
+          </tr>
+          <tr>
+            <th>Bagian Pekerjaan yang Dibantu</th>
+            <td>
+              1. Perancangan skema relasional tabel database (SQL schema).<br>
+              2. Pembuatan middleware verifikasi autentikasi JWT dan pengecekan role pengguna.<br>
+              3. Penyusunan skenario uji coba mandiri keamanan web (SQL Injection, XSS, IDOR).<br>
+              4. Perancangan styling modern glassmorphism dan penataan struktur laporan.
+            </td>
+          </tr>
+          <tr>
+            <th>Contoh Prompt Utama</th>
+            <td>
+              <div class="code-box">"Buatkan middleware Express.js untuk memverifikasi JWT dari cookie HttpOnly dan memastikan role pengguna adalah 'admin'. Jika bukan admin atau token tidak valid, kembalikan status HTTP 403 Forbidden dan catat log peringatan tanpa membocorkan pesan error internal."</div>
+            </td>
+          </tr>
+          <tr>
+            <th>Metode Peninjauan & Verifikasi Hasil</th>
+            <td>
+              Seluruh kode yang dihasilkan oleh AI ditinjau manual baris demi baris, diuji coba pada local development (localhost), diperiksa agar tidak mengandung hardcoded secret atau data sensitif, serta divalidasi perilakunya saat menangani input abnormal/ilegal.
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 8. HASIL SELF-TESTING KEAMANAN -->
+    <div class="section">
+      <div class="section-title">8. Hasil Self-Testing Keamanan (Minimal 5 Skenario)</div>
+      <div class="section-content">
+        <p>Pengujian mandiri dilakukan secara manual menggunakan Browser DevTools, Curl, dan simulasi payload serangan:</p>
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th style="width: 5%;">No</th>
+              <th style="width: 20%;">Skenario Uji</th>
+              <th style="width: 28%;">Metode / Cara Pengujian</th>
+              <th style="width: 15%;">Hasil Awal</th>
+              <th>Tindakan Perbaikan & Status Akhir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><strong>SQL Injection pada Form Login</strong></td>
+              <td>Menginput payload <code>' OR '1'='1' --</code> pada field email login dan password.</td>
+              <td><span class="badge badge-success">LOLOS</span></td>
+              <td>Input diproses menggunakan ORM parameterized query; sistem mengembalikan <em>"Email atau password salah"</em> tanpa eksekusi query liar.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><strong>Cross-Site Scripting (XSS) pada Form Input</strong></td>
+              <td>Memasukkan script <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code> pada nama member dan catatan progress.</td>
+              <td><span class="badge badge-success">LOLOS</span></td>
+              <td>Karakter HTML di-escape secara otomatis oleh template frontend React JSX; script hanya tampil sebagai teks murni tanpa dieksekusi.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><strong>IDOR / Role Access Control (User biasa buka Admin)</strong></td>
+              <td>Login sebagai akun member, kemudian mencoba mengakses URL <code>/admin/members</code> dan endpoint <code>GET /api/admin/classes</code>.</td>
+              <td><span class="badge badge-success">LOLOS</span></td>
+              <td>Frontend me-redirect ke dashboard member; backend mengembalikan HTTP 403 Forbidden melalui middleware otorisasi.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><strong>Kebocoran Secret di Git Repository</strong></td>
+              <td>Pemeriksaan git log dan pencarian file kredensial database/API key pada commit publik.</td>
+              <td><span class="badge badge-success">LOLOS</span></td>
+              <td>File <code>.env</code> telah masuk ke <code>.gitignore</code>; repository hanya memuat file <code>.env.example</code> tanpa password nyata.</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><strong>Pemeriksaan Enkripsi HTTPS & SSL/TLS</strong></td>
+              <td>Mengakses domain <code>https://machogym.my.id/</code> melalui browser dan menguji koneksi HTTP port 80.</td>
+              <td><span class="badge badge-success">LOLOS</span></td>
+              <td>Koneksi memiliki sertifikat SSL/TLS valid (ikon gembok terkunci), akses via HTTP otomatis dialihkan (redirect 301) ke HTTPS.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAGE BREAK -->
+    <div class="page-break"></div>
+
+    <!-- 9. TANGKAPAN LAYAR (EVIDENCE) -->
+    <div class="section">
+      <div class="section-title">9. Tangkapan Layar (Bukti Implementasi & Hosting)</div>
+      <div class="section-content">
+        <p style="font-size: 9.5pt; color: #64748b; margin-bottom: 12px;">
+          <em>Tangkapan layar di bawah ini menunjukkan bukti fungsionalitas aplikasi di hosting publik <strong>https://machogym.my.id/</strong>:</em>
+        </p>
+
+        <div class="screenshot-grid">
+          <!-- Screenshot 1 -->
+          <div class="screenshot-card">
+            <div class="screenshot-card-header">A. Halaman Autentikasi (Login & Registrasi)</div>
+            <div class="screenshot-placeholder">
+              <span style="font-size: 24px; margin-bottom: 6px;">🔐</span>
+              <strong>[ Tangkapan Layar Form Login ]</strong>
+              <span>Tampilan login dengan proteksi form dan tombol navigasi role.</span>
+            </div>
+            <div class="screenshot-desc">
+              Menampilkan form login dengan input email dan password yang divalidasi serta hashing bcrypt di backend.
+            </div>
+          </div>
+
+          <!-- Screenshot 2 -->
+          <div class="screenshot-card">
+            <div class="screenshot-card-header">B. Halaman Pengelolaan Data (Dashboard Admin CRUD)</div>
+            <div class="screenshot-placeholder">
+              <span style="font-size: 24px; margin-bottom: 6px;">📋</span>
+              <strong>[ Tangkapan Layar Manajemen Data / CRUD ]</strong>
+              <span>Tabel data member, trainer, dan jadwal kelas fitness.</span>
+            </div>
+            <div class="screenshot-desc">
+              Fitur CRUD lengkap: Admin dapat menambah, memperbarui status, dan menghapus record pada database.
+            </div>
+          </div>
+
+          <!-- Screenshot 3 -->
+          <div class="screenshot-card">
+            <div class="screenshot-card-header">C. Halaman Laporan & Rekapitulasi Data</div>
+            <div class="screenshot-placeholder">
+              <span style="font-size: 24px; margin-bottom: 6px;">📊</span>
+              <strong>[ Tangkapan Layar Laporan & Grafik ]</strong>
+              <span>Rekapitulasi pembayaran membership & grafik progres.</span>
+            </div>
+            <div class="screenshot-desc">
+              Laporan ringkasan operasional dan pemantauan transaksi serta progres latihan anggota.
+            </div>
+          </div>
+
+          <!-- Screenshot 4 -->
+          <div class="screenshot-card">
+            <div class="screenshot-card-header">D. Bukti Domain Aktif & Validitas HTTPS (SSL/TLS)</div>
+            <div class="screenshot-placeholder">
+              <span style="font-size: 24px; margin-bottom: 6px;">🔒</span>
+              <strong>https://machogym.my.id/</strong>
+              <span style="color: #15803d; font-weight: 600;">Connection is Secure (Valid Certificate)</span>
+            </div>
+            <div class="screenshot-desc">
+              Ikon gembok hijau/aman pada browser membuktikan sertifikat TLS aktif dan valid pada FQDN machogym.my.id.
+            </div>
+          </div>
+
+          <!-- Screenshot 5 -->
+          <div class="screenshot-card">
+            <div class="screenshot-card-header">E. Bukti Konfigurasi Hosting / DNS Domain</div>
+            <div class="screenshot-placeholder">
+              <span style="font-size: 24px; margin-bottom: 6px;">🌐</span>
+              <strong>[ Dashboard DNS & Hosting Provider ]</strong>
+              <span>A Record / CNAME pointing ke machogym.my.id.</span>
+            </div>
+            <div class="screenshot-desc">
+              Konfigurasi DNS domain publik aktif yang mengarah ke server hosting aplikasi web.
+            </div>
+          </div>
+
+          <!-- Screenshot 6 -->
+          <div class="screenshot-card">
+            <div class="screenshot-card-header">F. Bukti Self-Testing Keamanan (Input / Header Test)</div>
+            <div class="screenshot-placeholder">
+              <span style="font-size: 24px; margin-bottom: 6px;">🛡️</span>
+              <strong>[ Hasil Audit Security / Input Test ]</strong>
+              <span>Tangkapan layar penolakan payload SQLi/XSS.</span>
+            </div>
+            <div class="screenshot-desc">
+              Bukti hasil penolakan injeksi string ilegal serta status proteksi endpoint dari akses tidak berizin.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. KENDALA DAN RENCANA PERBAIKAN -->
+    <div class="section">
+      <div class="section-title">10. Kendala dan Rencana Perbaikan</div>
+      <div class="section-content">
+        <table>
+          <tr>
+            <th style="width: 50%;">Kendala yang Dihadapi</th>
+            <th style="width: 50%;">Solusi & Rencana Perbaikan</th>
+          </tr>
+          <tr>
+            <td>
+              <strong>1. Konfigurasi CORS pada Domain Kustom:</strong><br>
+              Saat pertama kali deploy ke domain <code>machogym.my.id</code>, browser sempat menolak request API karena origin domain belum terdaftar di whitelist CORS backend.
+            </td>
+            <td>
+              <strong>Solusi:</strong><br>
+              Menambahkan origin <code>https://machogym.my.id</code> ke dalam array <code>allowedOrigins</code> di konfigurasi middleware Express/CORS, serta memastikan <code>credentials: true</code>.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>2. Sinkronisasi Sesi Chat Real-time:</strong><br>
+              Koneksi WebSocket pada lingkungan hosting memerlukan konfigurasi proxy port dan header upgrade (WebSocket Handshake).
+            </td>
+            <td>
+              <strong>Solusi:</strong><br>
+              Menyesuaikan konfigurasi reverse proxy hosting untuk mengizinkan protokol <code>Upgrade</code> dan <code>Connection: Upgrade</code> untuk Socket.io.
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tanda Tangan / Penutup -->
+    <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
+      <div style="text-align: center; width: 220px;">
+        <p style="margin-bottom: 50px;">
+          ........................, 2026<br>
+          Mahasiswa Penyusun,
+        </p>
+        <p style="font-weight: 700; text-decoration: underline; margin-bottom: 2px;">Rafly Irhandy</p>
+        <p style="font-size: 9pt; color: #64748b;">NIM: [NIM Mahasiswa]</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

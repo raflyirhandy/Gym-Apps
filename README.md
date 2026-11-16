@@ -1,22 +1,32 @@
-# 💪 MachoGym — Sistem Manajemen Gym
+# 💪 MachoGym — Sistem Manajemen Gym & Keanggotaan
 
-<div align="center">
+### Proyek Cyber Security (Pra UTS) - Semester 5
 
-**Aplikasi web manajemen gym full-stack dengan sistem multi-role (Admin, Trainer, Member).**  
-Dibangun dengan Native PHP, MySQL, dan antarmuka modern berbasis glassmorphism.
+![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Security](https://img.shields.io/badge/SECURITY-BCRYPT%20%7C%20RBAC-1E3A8A?style=for-the-badge&logo=shield&logoColor=white)
+![Deployment](https://img.shields.io/badge/DEPLOYMENT-LIVE%20HTTPS-16A34A?style=for-the-badge&logo=vercel&logoColor=white)
 
-![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)
-![XAMPP](https://img.shields.io/badge/XAMPP-Server-FB7A24?logo=xampp&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
+---
 
-</div>
+## Identitas Mahasiswa
+
+- **Nama:** Rafly Irhandy
+- **NIM:** 20240810019
+- **Kelas:**  TINFC-2024-02
+- **Mata Kuliah:** Cyber Security
+- **Dosen Pengampu:** Dosen Cyber Security
+- **Tahun Akademik:** 2026/2027
 
 ---
 
 ## 📋 Deskripsi
 
-**MachoGym** adalah sistem manajemen gym berbasis web yang dirancang untuk mengelola operasional gym secara efisien. Aplikasi ini mendukung tiga peran pengguna — **Admin**, **Trainer**, dan **Member** — masing-masing dengan dashboard dan fitur yang disesuaikan. Dibangun menggunakan arsitektur MVC sederhana dengan Native PHP dan MySQL.
+**MachoGym** adalah sistem manajemen gym berbasis web yang dirancang untuk mengelola operasional gym secara efisien. Aplikasi ini mendukung tiga peran pengguna — **Admin**, **Trainer**, dan **Member** — masing-masing dengan dashboard dan fitur yang disesuaikan.
+
+- 🌐 **URL Aplikasi Aktif (Live):** [https://machogym.my.id/](https://machogym.my.id/) (HTTPS / SSL Valid)
+- 📁 **Repository:** [https://github.com/raflyirhandy/Gym-Apps.git](https://github.com/raflyirhandy/Gym-Apps.git)
 
 ---
 
@@ -294,6 +304,59 @@ erDiagram
         timestamp created_at
     }
 ```
+
+---
+
+## 🔒 Konfigurasi Environment Variable (Tanpa Nilai Rahasia)
+
+Untuk menjaga keamanan kredensial pada environment produksi maupun lokal, konfigurasi sensitif disimpan dalam file environment (`.env` / environment server) dan tidak di-commit ke repository:
+
+```env
+APP_ENV=production
+APP_URL=https://machogym.my.id
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=gym_db
+DB_USER=your_db_username
+DB_PASS=your_db_password
+
+JWT_SECRET=your_random_jwt_secret_key
+JWT_EXPIRES_IN=7d
+```
+
+---
+
+## 🛡️ Penerapan Keamanan & Hasil Self-Testing
+
+### Aspek Keamanan yang Diterapkan
+- **Password Hashing:** Menggunakan `bcrypt` untuk menyimpan kata sandi secara aman (bukan plaintext).
+- **Pencegahan SQL Injection:** Menggunakan Prepared Statements / Parameterized Queries (PDO / Sequelize ORM).
+- **Pencegahan XSS:** Validasi dan sanitasi input serta output encoding (HTML escaping).
+- **Manajemen Sesi & Token:** Autentikasi menggunakan JWT / Session dengan atribut cookie `HttpOnly` dan `Secure`.
+- **Role-Based Access Control (RBAC):** Pemisahan hak akses ketat untuk **Admin**, **Trainer**, dan **Member** di setiap endpoint dan route.
+- **HTTPS & Security Headers:** Enkripsi SSL/TLS aktif pada `https://machogym.my.id/` disertai pengaturan CORS whitelist dan rate limiting.
+
+### Ringkasan Hasil Self-Testing Keamanan
+
+| No | Skenario Uji | Metode Pengujian | Hasil | Perbaikan & Status |
+|:---|:---|:---|:---|:---|
+| 1 | **SQL Injection (Login)** | Input `' OR '1'='1' --` pada form login | ✅ Lolos | Parameterized query memproses input sebagai literal string; login ditolak aman. |
+| 2 | **Cross-Site Scripting (XSS)** | Input `<script>alert(1)</script>` pada form | ✅ Lolos | Karakter HTML di-escape saat rendering; script tidak dieksekusi. |
+| 3 | **Kontrol Akses / IDOR** | User Member mencoba mengakses route/API Admin | ✅ Lolos | Middleware otorisasi memblokir akses dan mengembalikan status `403 Forbidden`. |
+| 4 | **Brute Force / Rate Limiting** | Percobaan login gagal berulang (>10x) | ✅ Lolos | Rate limiter membatasi request berlebih dari IP yang sama. |
+| 5 | **HTTPS & Secret Leak** | Cek SSL `machogym.my.id` & audit commit Git | ✅ Lolos | Sertifikat SSL/TLS valid dan tidak ada secret/kredensial ter-commit di Git. |
+
+---
+
+## 🤖 Penggunaan AI Agent
+
+Pengembangan aplikasi ini dibantu oleh AI Agent secara bertanggung jawab sesuai ketentuan akademik:
+- **Alat AI yang Digunakan:** Google DeepMind Antigravity, Gemini, dan Cursor Agent.
+- **Bagian yang Dibantu:** Perancangan struktur skema database, penyusunan middleware validasi autentikasi/RBAC, desain antarmuka, dan penyusunan skenario pengujian keamanan.
+- **Contoh Prompt Utama:**
+  > *"Buatkan middleware verifikasi token sesi/JWT dari cookie HttpOnly dan pastikan hanya role admin yang dapat mengakses endpoint ini. Kembalikan 403 Forbidden jika otorisasi gagal tanpa membocorkan error internal."*
+- **Review & Verifikasi:** Seluruh kode hasil bantuan AI telah ditinjau ulang baris demi baris, diuji coba fungsionalitas dan keamanannya secara manual, serta dipastikan tidak mengandung data rahasia atau kredensial nyata dalam prompt maupun kode.
 
 ---
 

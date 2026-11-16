@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "gym_db";
-    private $username = "root";
-    private $password = "";
+    private $db_name = "machogym_gym_db";
+    private $username = "machogym_admin";
+    private $password = "kqOinUgT7bedFU=q";
     public $conn;
 
     public function getConnection() {

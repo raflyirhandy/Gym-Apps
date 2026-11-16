@@ -71,7 +71,7 @@ class AdminMemberController {
                         <div style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; display: flex; justify-content: center;'>
                             <div style='background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); width: 400px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); color: white; padding: 20px; position: relative; overflow: hidden; margin: 0 auto;'>
                                 <div style='text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; margin-bottom: 20px;'>
-                                    <h2 style='margin: 0; font-size: 24px; letter-spacing: 2px;'>GYM FIT</h2>
+                                    <h2 style='margin: 0; font-size: 24px; letter-spacing: 2px;'>MACHO GYM</h2>
                                     <p style='margin: 5px 0 0; font-size: 12px; color: #ccc;'>MEMBER CARD</p>
                                 </div>
                                 
